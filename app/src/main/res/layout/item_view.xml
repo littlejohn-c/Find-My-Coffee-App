@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/rounded_corner"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nameoutput"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        tools:text="A Coffee Shop Name" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addressoutput"
+        android:layout_below="@id/nameoutput"
+        android:textColor="#303030"
+        tools:text="An address" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/hoursoutput"
+        android:layout_below="@id/addressoutput"
+        android:textSize="12dp"
+        android:textColor="#5C5C5C"
+        tools:text="Some Business Hours" />
+
+</RelativeLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00BCD4"
+    android:padding="10dp"
+    tools:context=".CoffeeShopListActivity">
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/shopstitle"
+        android:text="COFFEE SHOPS NEAR YOU:"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        android:layout_below="@id/shopstitle"
+        android:layout_above="@+id/inputlocationbtn"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Coffee Shop"
+        android:id="@+id/addshopbtn"
+        android:layout_above="@id/inputlocationbtn"
+        android:textColor="#00BCD4"
+        android:backgroundTint="@color/white"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Input Your Location:"
+        android:id="@+id/inputlocationbtn"
+        android:layout_alignParentBottom="true"
+        android:textColor="#00BCD4"
+        android:backgroundTint="@color/white"
+        />
+
+
+</RelativeLayout>
