@@ -17,7 +17,7 @@ import io.realm.Sort;
 
 public class CoffeeShopListActivity extends AppCompatActivity {
 
-    @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee_shop_list);
@@ -32,8 +32,9 @@ public class CoffeeShopListActivity extends AppCompatActivity {
             }
         });
 
+
         // Will likely need to refactor this part for data
-        /*Realm.init(getApplicationContext());
+        Realm.init(getApplicationContext());
         Realm realm = Realm.getDefaultInstance();
         //Can add sort function here later, will need to refactor shop hours data
         RealmResults<CoffeeShop> coffeeShopList = realm.where(CoffeeShop.class).findAll();
@@ -48,6 +49,6 @@ public class CoffeeShopListActivity extends AppCompatActivity {
             public void onChange(RealmResults<CoffeeShop> coffeeShops) {
                 myAdapter.notifyDataSetChanged();
             }
-        });*/
+        });
     }
 }

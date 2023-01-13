@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00BCD4"
+    android:background="@color/white"
     android:padding="10dp"
     tools:context=".CoffeeShopListActivity">
     
@@ -14,14 +14,14 @@
         android:id="@+id/shopstitle"
         android:text="COFFEE SHOPS NEAR YOU:"
         android:textSize="20dp"
-        android:textColor="@color/white"
+        android:textColor="#80696112"
         android:textStyle="bold"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/inputlocationbtn"
         android:layout_below="@id/shopstitle"
         android:layout_marginTop="-29dp"
@@ -33,7 +33,7 @@
         android:text="Add Coffee Shop"
         android:id="@+id/addshopbtn"
         android:layout_above="@id/inputlocationbtn"
-        android:textColor="#00BCD4"
+        android:textColor="#80696112"
         android:backgroundTint="@color/white"
         />
 
@@ -43,7 +43,7 @@
         android:text="Input Your Location:"
         android:id="@+id/inputlocationbtn"
         android:layout_alignParentBottom="true"
-        android:textColor="#00BCD4"
+        android:textColor="#80696112"
         android:backgroundTint="@color/white"
         />
 

@@ -29,13 +29,10 @@ public class MainActivity extends AppCompatActivity {
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (username.getText().toString().equals("admin") && (password.getText().toString().equals("admin"))) {
-                    //correct
 
-                    Toast.makeText(MainActivity.this, "LOGIN SUCCESSFUL", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(MainActivity.this, "LOGIN FAILED. TRY AGAIN.", Toast.LENGTH_SHORT).show();
-                }
+                Intent i = new Intent(getApplicationContext(),CoffeeShopListActivity.class);
+                startActivity(i);
+
             }
         });
     }
