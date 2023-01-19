@@ -40,7 +40,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Input Your Location:"
+        android:text="View On Map"
         android:id="@+id/inputlocationbtn"
         android:layout_alignParentBottom="true"
         android:textColor="#80696112"

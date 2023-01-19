@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         //admin and admin
 
-        startActivity(new Intent(MainActivity.this, CoffeeShopListActivity.class));
         loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

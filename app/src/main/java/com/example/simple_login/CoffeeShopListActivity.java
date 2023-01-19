@@ -12,6 +12,7 @@ import com.google.android.material.button.MaterialButton;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
+import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import io.realm.Sort;
 
@@ -22,19 +23,12 @@ public class CoffeeShopListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coffee_shop_list);
 
-        MaterialButton addShopBtn = findViewById(R.id.addshopbtn);
-        MaterialButton inputLocationBtn = findViewById(R.id.inputlocationbtn);
-
-        addShopBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               startActivity(new Intent(CoffeeShopListActivity.this, AddShopActivity.class));
-            }
-        });
 
 
         // Will likely need to refactor this part for data
-        Realm.init(getApplicationContext());
+        Realm.init (getApplicationContext());
+        RealmConfiguration config = new RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build();
+        Realm.setDefaultConfiguration(config);
         Realm realm = Realm.getDefaultInstance();
         //Can add sort function here later, will need to refactor shop hours data
         RealmResults<CoffeeShop> coffeeShopList = realm.where(CoffeeShop.class).findAll();
@@ -44,11 +38,16 @@ public class CoffeeShopListActivity extends AppCompatActivity {
         MyAdapter myAdapter = new MyAdapter(getApplicationContext(), coffeeShopList);
         recyclerView.setAdapter(myAdapter);
 
-        coffeeShopList.addChangeListener(new RealmChangeListener<RealmResults<CoffeeShop>>() {
-            @Override
-            public void onChange(RealmResults<CoffeeShop> coffeeShops) {
-                myAdapter.notifyDataSetChanged();
-            }
-        });
+        MaterialButton addShopBtn = findViewById(R.id.addshopbtn);
+        MaterialButton inputLocationBtn = findViewById(R.id.inputlocationbtn);
+
+
+        addShopBtn.setOnClickListener(v -> startActivity(new Intent(CoffeeShopListActivity.this, AddShopActivity.class)));
+
+        inputLocationBtn.setOnClickListener(v -> startActivity(new Intent(CoffeeShopListActivity.this, MapsFragment.class)));
+
+
+
+        coffeeShopList.addChangeListener(coffeeShops -> myAdapter.notifyDataSetChanged());
     }
 }
