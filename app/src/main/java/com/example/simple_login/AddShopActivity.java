@@ -2,7 +2,6 @@ package com.example.simple_login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -31,13 +30,13 @@ public class AddShopActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String name = nameInput.getText().toString();
                 String address = addressInput.getText().toString();
-                String hours = hoursInput.getText().toString();
+                //Integer hours = hoursInput.getText().toInteger();
 
                 realm.beginTransaction();
                 CoffeeShop coffeeShop = realm.createObject(CoffeeShop.class);
                 coffeeShop.setName(name);
                 coffeeShop.setAddress(address);
-                coffeeShop.setHours(hours);
+                //coffeeShop.setHours(hours);
                 realm.commitTransaction();
                 Toast.makeText(getApplicationContext(),"Shop Saved", Toast.LENGTH_SHORT).show();
                 finish();

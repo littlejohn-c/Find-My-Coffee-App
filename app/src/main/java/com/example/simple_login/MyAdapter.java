@@ -32,7 +32,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         CoffeeShop coffeeShop = coffeeShopList.get(position);
         holder.nameOutput.setText(coffeeShop.getName());
         holder.addressOutput.setText(coffeeShop.getAddress());
-        holder.hoursOutput.setText(coffeeShop.getHours());
     }
 
     @Override
