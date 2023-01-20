@@ -12,7 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SimpleLogin"
         tools:targetApi="31">
-
+        <activity
+            android:name=".CreateUser"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -49,7 +55,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".MainActivityLogin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
