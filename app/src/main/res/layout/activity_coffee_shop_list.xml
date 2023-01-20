@@ -8,14 +8,6 @@
     android:background="@color/white"
     android:padding="10dp"
     tools:context=".CoffeeShopListActivity">
-
-    <fragment
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:map="http://schemas.android.com/apk/res-auto"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
     
     <TextView
         android:layout_width="wrap_content"
@@ -24,15 +16,22 @@
         android:text="COFFEE SHOPS NEAR YOU:"
         android:textSize="20dp"
         android:textColor="#80696112"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".MapsFragment" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/inputlocationbtn"
-        android:layout_below="@id/shopstitle"
+        android:layout_above="@+id/addshopbtn"
+        android:layout_below="@+id/map"
         android:layout_marginTop="-29dp"
         android:layout_marginBottom="29dp" />
 
@@ -41,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="Add Coffee Shop"
         android:id="@+id/addshopbtn"
-        android:layout_above="@id/inputlocationbtn"
+        android:layout_above="@+id/inputlocationbtn"
         android:textColor="#80696112"
         android:backgroundTint="@color/white"
         />

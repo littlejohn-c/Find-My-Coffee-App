@@ -5,13 +5,13 @@ import io.realm.RealmObject;
 public class CoffeeShop extends RealmObject {
     String name;
     String address;
-    Integer hours;
+    String hours;
 
-    public Integer getHours() {
+    public String getHours() {
         return hours;
     }
 
-    public void setHours(Integer hours) {
+    public void setHours(String hours) {
         this.hours = hours;
     }
 
