@@ -8,57 +8,39 @@
     android:background="@color/white"
     android:padding="10dp"
     tools:context=".CoffeeShopListActivity">
-    
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/shopstitle"
-        android:text="COFFEE SHOPS NEAR YOU:"
-        android:textSize="20dp"
-        android:textColor="#80696112"
-        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/option_get_place" />
 
-
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="400dp"
+        android:layout_alignTop="@id/map"
         tools:context=".MapsFragment" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/map"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/shopstitle"
+        android:text="COFFEE SHOPS NEAR YOU:"
+        android:textSize="20sp"
+        android:textColor="#80696112"
+        android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/addshopbtn"
-        android:layout_below="@+id/map"
-        android:layout_marginTop="-29dp"
+        android:layout_below="@+id/shopstitle"
         android:layout_marginBottom="29dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Coffee Shop"
-        android:id="@+id/addshopbtn"
-        android:layout_above="@+id/inputlocationbtn"
-        android:textColor="#80696112"
-        android:backgroundTint="@color/white"
-        />
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="View On Map"
-        android:id="@+id/inputlocationbtn"
-        android:layout_alignParentBottom="true"
-        android:textColor="#80696112"
-        android:backgroundTint="@color/white"
-        />
 
 
 </RelativeLayout>
