@@ -2,7 +2,10 @@ package com.example.simple_login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 public class CreateUser extends AppCompatActivity {
 
@@ -11,4 +14,5 @@ public class CreateUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
     }
+
 }

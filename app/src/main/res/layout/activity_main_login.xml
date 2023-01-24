@@ -78,21 +78,4 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="30dp" />
 
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/forgotpassword"-->
-<!--            android:layout_below="@id/loginbtn"-->
-<!--            android:text="Forgot password?"-->
-<!--            android:textColor="#696112"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_margin="10dp"-->
-<!--        -->
-
-
-
-
-
-
-
 </RelativeLayout>
