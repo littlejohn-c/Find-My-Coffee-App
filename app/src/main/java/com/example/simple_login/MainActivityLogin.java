@@ -18,18 +18,19 @@ public class MainActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
-        createbtn = findViewById(R.id.newUser);
+        createbtn = findViewById(R.id.newUserButton);
         createbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 switchActivities();
             }
         });
+
         TextView username = (TextView) findViewById(R.id.username);
         TextView password = (TextView) findViewById(R.id.password);
 
         MaterialButton loginbtn = (MaterialButton) findViewById(R.id.loginbtn);
-        MaterialButton newUser = (MaterialButton)  findViewById(R.id.newUser);
+        MaterialButton newUser = (MaterialButton)  findViewById(R.id.newUserButton);
 
         //admin and admin
 

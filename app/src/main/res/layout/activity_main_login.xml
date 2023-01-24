@@ -69,7 +69,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/newUser"
+        android:id="@+id/newUserButton"
         android:layout_below="@id/loginbtn"
         android:text="Create New User"
         android:textSize="10dp"
