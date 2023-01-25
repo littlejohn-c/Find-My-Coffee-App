@@ -69,15 +69,18 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/newUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/newUserButton"
         android:layout_below="@id/btnLogin1"
-        android:text="Create New User"
-        android:textSize="10dp"
-        android:textColor="#696112"
-        android:backgroundTint="@color/design_default_color_on_primary"
         android:layout_centerHorizontal="true"
-        android:layout_margin="30dp" />
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/design_default_color_on_primary"
+        android:text="Create New User"
+        android:textColor="#696112"
+        android:textSize="10dp" />
 
 </RelativeLayout>

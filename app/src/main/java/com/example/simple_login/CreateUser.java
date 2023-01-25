@@ -38,7 +38,7 @@ public class CreateUser extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String mail = email.getText().toString();
-                if(TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
+                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
                     Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
                 else {
                     Boolean checkUser = DB.checkUsername(user);
@@ -56,21 +56,12 @@ public class CreateUser extends AppCompatActivity {
             }
         });
 
-
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(),MainActivityLogin.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
                 startActivity(intent);
             }
         });
-
-//        MaterialButton confirmbtn = (MaterialButton) findViewById(R.id.btnConfirm);
-//
-//    }
-//
-//    private void switchActivities() {
-//        Intent switchActivityIntent = new Intent(this, MainActivityLogin.class);
-//        startActivity(switchActivityIntent);
-//        }
-    }}
+    }
+}
