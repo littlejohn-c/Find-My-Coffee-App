@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".MainActivityLogin">
+    tools:context=".CreateUser">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/signin"
+        android:id="@+id/createAccountBelow"
         android:background="@color/white"
         android:text = "CREATE ACCOUNT BELOW"
+        android:textStyle="bold"
         android:textColor="#696112"
         android:textSize="25dp"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="360dp"
         android:gravity="center"/>
 
 
@@ -23,7 +24,7 @@
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/signin"
+        android:layout_below="@+id/createAccountBelow"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
@@ -71,7 +72,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/confirmbtn"
+        android:id="@+id/btnConfirm"
         android:layout_below="@id/email"
         android:text="CONFIRM"
         android:textSize="25dp"
