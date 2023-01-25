@@ -29,6 +29,7 @@ public class MainActivityLogin extends AppCompatActivity {
         username = findViewById(R.id.username1);
         password = findViewById(R.id.password1);
         btnLogin = findViewById(R.id.btnLogin1);
+        newUserButton = findViewById(R.id.newUserButton);
         DB = new DBHelper(this);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
