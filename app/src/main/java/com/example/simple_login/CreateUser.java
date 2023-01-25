@@ -19,33 +19,24 @@ public class CreateUser extends AppCompatActivity {
         setContentView(R.layout.activity_create_user);
 
 
-    confirmbtn = findViewById(R.id.confirmbtn);
-        confirmbtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {switchActivities();}
-    });
-
-    TextView username = (TextView) findViewById(R.id.username);
-    TextView password = (TextView) findViewById(R.id.password);
-    TextView email = (TextView) findViewById(R.id.email);
-
-    MaterialButton confirmbtn = (MaterialButton)  findViewById(R.id.confirmbtn);
-
-    //admin and admin
-
+        confirmbtn = findViewById(R.id.confirmbtn);
         confirmbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(getApplicationContext(), MainActivityLogin.class);
-                startActivity(i);
+                finish();
             }
-        }
-    }
+        });
 
+        TextView username = (TextView) findViewById(R.id.username);
+        TextView password = (TextView) findViewById(R.id.password);
+        TextView email = (TextView) findViewById(R.id.email);
+
+        MaterialButton confirmbtn = (MaterialButton) findViewById(R.id.confirmbtn);
+
+    }
 
     private void switchActivities() {
         Intent switchActivityIntent = new Intent(this, MainActivityLogin.class);
         startActivity(switchActivityIntent);
-    });
         }
+}
