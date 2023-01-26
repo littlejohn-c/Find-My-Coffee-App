@@ -44,7 +44,7 @@ public class CreateUser extends AppCompatActivity {
                     Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
                 else {
                     Boolean checkuserpass = DB.checkUsernamePassword(user, pass);
-                    if (checkuserpass) {
+                    if (checkuserpass == true) {
                         Toast.makeText(CreateUser.this, " Login created!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
                         startActivity(intent);
@@ -68,14 +68,6 @@ public class CreateUser extends AppCompatActivity {
 //                    }
                 }
             });
-
-//
-//        btnGoBack.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View view) {
-//                Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
-//                startActivity(intent);
-//            }
-//        });
     }
 }
 

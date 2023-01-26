@@ -13,12 +13,18 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
 
-        super(context, "users.db", null, 1);
+        super(context, dbName, null, 1);
     }
+
+//    @Override
+//    public void onConfigure(SQLiteDatabase db) {
+//        super.onConfigure(db);
+//        db.setForeignKeyConstraintsEnabled(true);
+//    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table users(username TEXT primary key, password TEXT)");
+        db.execSQL("create table users (username TEXT primary key, password TEXT)");
     }
 
     @Override
@@ -27,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String username, String password) {
+    public Boolean insertData(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -43,14 +49,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Boolean checkUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from users where username = ?", new String[]{username});
+//        Cursor cursor = db.rawQuery("select * from users where username = ?", new String[]{username});
+
+        Cursor cursor = db.rawQuery("SELECT * from " + dbName + " where username = ?", new String[]{username});
         if (cursor.getCount() > 0)
             return true;
         else return false;
     }
     public Boolean checkUsernamePassword(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from users where username = ? and password = ?", new String[]{username, password});
+//        Cursor cursor = db.rawQuery("select * from users where username = ? and password = ?", new String[]{username, password});
+        Cursor cursor = db.rawQuery("SELECT * from " + dbName + " where username = ? and password = ?", new String[]{username, password});
         if (cursor.getCount() > 0)
             return true;
         else return false;
