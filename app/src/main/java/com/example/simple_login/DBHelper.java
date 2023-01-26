@@ -7,34 +7,40 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String dbName = "btnConfirm.db";
+    public static final String dbName = "users.db";
+    public static final String COLUMN_USERNAMES = "username";
+    public static final String COLUMN_PASSWORDS = "password";
 
     public DBHelper(Context context) {
-        super(context, "btnConfirm.db", null, 1);
+
+        super(context, "users.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table users(username TEXT primary key, password TEXT, email TEXT)");
+        db.execSQL("create table users(username TEXT primary key, password TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists users");
+        onCreate(db);
     }
 
-    public Boolean insertData(String username, String password, String email) {
+    public boolean insertData(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put("username", username);
         values.put("password", password);
-        values.put("email", email);
 
         long result = db.insert("users", null, values);
-        if (result == -1) return false;
-        else return true;
+        if (result == -1)
+            return false;
+        else
+            return true;
     }
+
     public Boolean checkUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from users where username = ?", new String[]{username});
@@ -50,12 +56,12 @@ public class DBHelper extends SQLiteOpenHelper {
         else return false;
     }
 
-    public Boolean checkAllInfo(String username, String password, String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from users where username = ? and password = ? and email = ?", new String[]{username, password, email});
-        if (cursor.getCount() > 0)
-            return true;
-        else return false;
-    }
+//    public Boolean checkAllInfo(String username, String password) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery("select * from users where username = ? and password = ? and email = ?", new String[]{username, password, email});
+//        if (cursor.getCount() > 0)
+//            return true;
+//        else return false;
+//    }
 }
 

@@ -16,8 +16,8 @@ import com.google.android.material.button.MaterialButton;
 import org.w3c.dom.Text;
 
 public class CreateUser extends AppCompatActivity {
-    EditText username, password, email;
-    Button btnConfirm;
+    EditText username, password;
+    Button btnConfirm, btnGoBack;
     DBHelper DB;
 
     @Override
@@ -27,8 +27,9 @@ public class CreateUser extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-        email = findViewById(R.id.email);
+//        email = findViewById(R.id.email);
         btnConfirm = findViewById(R.id.btnConfirm);
+
         DB = new DBHelper(this);
 
 
@@ -37,18 +38,18 @@ public class CreateUser extends AppCompatActivity {
             public void onClick(View view) {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-                String mail = email.getText().toString();
+//                String email = email.getText().toString();
 
-                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
+                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass))
                     Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
                 else {
-                    Boolean checkAllInfo = DB.checkAllInfo(user, pass, mail);
-                    if (checkAllInfo == true) {
-                        Toast.makeText(CreateUser.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    Boolean checkuserpass = DB.checkUsernamePassword(user, pass);
+                    if (checkuserpass) {
+                        Toast.makeText(CreateUser.this, " Login created!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(CreateUser.this, "Login failure. Try again.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateUser.this, "Create account failure. Try again.", Toast.LENGTH_SHORT).show();
                     }
                 }
 //                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
@@ -68,9 +69,8 @@ public class CreateUser extends AppCompatActivity {
                 }
             });
 
-
-//        btnConfirm.setOnClickListener(new View.OnClickListener() {
-//            @Override
+//
+//        btnGoBack.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View view) {
 //                Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
 //                startActivity(intent);

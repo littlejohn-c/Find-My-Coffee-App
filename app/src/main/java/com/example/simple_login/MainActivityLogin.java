@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 
 public class MainActivityLogin extends AppCompatActivity {
-    TextView username, password, email;
+    TextView username, password;
     Button btnLogin, newUserButton;
     DBHelper DB;
 
@@ -26,9 +26,9 @@ public class MainActivityLogin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_login);
 
-        username = findViewById(R.id.username1);
-        password = findViewById(R.id.password1);
-        btnLogin = findViewById(R.id.btnLogin1);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        btnLogin = findViewById(R.id.btnLogin);
         newUserButton = findViewById(R.id.newUserButton);
         DB = new DBHelper(this);
 
