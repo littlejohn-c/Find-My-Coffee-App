@@ -1,5 +1,7 @@
 package com.example.simple_login;
 
+import static com.example.simple_login.BuildConfig.MAPS_API_KEY;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,10 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,8 +42,8 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.android.material.button.MaterialButton;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -50,6 +52,9 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class CoffeeShopListActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -75,6 +80,9 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
         if(savedInstanceState != null){
             lastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
             cameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
@@ -82,7 +90,7 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
 
         setContentView(R.layout.activity_coffee_shop_list);
 
-        Places.initialize(getApplicationContext(), BuildConfig.MAPS_API_KEY);
+        Places.initialize(getApplicationContext(), MAPS_API_KEY);
         placesClient = Places.createClient(this);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -90,7 +98,6 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
 
         // Will likely need to refactor this part for data
         Realm.init(getApplicationContext());
@@ -185,6 +192,11 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
                             map.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
                             map.getUiSettings().setMyLocationButtonEnabled(false);
+                        }
+                        try {
+                            getCoffeeShops();
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     }
                 });
@@ -357,6 +369,23 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
             return false;
         }
         return true;
+    }
+
+    private void getCoffeeShops() throws IOException {
+        String fullUrl = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f%%2C%f&radius=1500&type=cafe&rankby=distance&key=%s"
+                , lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), MAPS_API_KEY);
+
+        OkHttpClient client = new OkHttpClient().newBuilder().build();
+//        MediaType mediaType = MediaType.parse("text/plain");
+//        RequestBody body = RequestBody.create(mediaType, "");
+        Request request = new Request.Builder()
+                .url(fullUrl)
+ //               .method("GET", body)
+                .build();
+        Response response = client.newCall(request).execute();
+        System.out.println(response);
+
+     //   CoffeeShop coffeeShop = new Gson().fromJson(String.valueOf(response), CoffeeShop.class);
     }
 
 }
