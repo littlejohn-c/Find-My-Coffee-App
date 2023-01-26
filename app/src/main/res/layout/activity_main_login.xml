@@ -22,7 +22,7 @@
 
 
     <EditText
-        android:id="@+id/username1"
+        android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signin"
@@ -42,8 +42,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password1"
-        android:layout_below="@+id/username1"
+        android:id="@+id/password"
+        android:inputType="textPassword"
+        android:layout_below="@+id/username"
         android:background="#80696112"
         android:hint=" PASSWORD:"
         android:textSize="20dp"
@@ -58,8 +59,8 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnLogin1"
-        android:layout_below="@id/password1"
+        android:id="@+id/btnLogin"
+        android:layout_below="@id/password"
         android:text="log in for coffee"
         android:textSize="25dp"
         android:textColor="#696112"
@@ -72,7 +73,7 @@
         android:id="@+id/newUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnLogin1"
+        android:layout_below="@id/btnLogin"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
