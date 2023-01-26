@@ -47,7 +47,7 @@ public class MainActivityLogin extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), CoffeeShopListActivity.class);
                         startActivity(intent);
                     } else {
-                        Toast.makeText(MainActivityLogin.this, "Login failure...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivityLogin.this, "Login failure. Try again.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

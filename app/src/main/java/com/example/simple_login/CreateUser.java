@@ -38,30 +38,44 @@ public class CreateUser extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
                 String mail = email.getText().toString();
+
                 if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
                     Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
                 else {
-                    Boolean checkUser = DB.checkUsername(user);
-                    if (checkUser == false) {
-                        Boolean insert = DB.insertData(user, pass, String.valueOf(email));
-                        if (insert == true) {
-                            Toast.makeText(CreateUser.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(CreateUser.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
-                        }
+                    Boolean checkAllInfo = DB.checkAllInfo(user, pass, String.valueOf(email));
+                    if (checkAllInfo == true) {
+                        Toast.makeText(CreateUser.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(CreateUser.this, "Login failure. Try again.", Toast.LENGTH_SHORT).show();
                     }
                 }
-            }
-        });
+//                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
+//                    Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
+//                else {
+//                    Boolean checkUser = DB.checkUsername(user);
+//                    if (checkUser == false) {
+//                        Boolean insert = DB.insertData(user, pass, String.valueOf(email));
+//                        if (insert == true) {
+//                            Toast.makeText(CreateUser.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+//                            Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
+//                            startActivity(intent);
+//                        } else {
+//                            Toast.makeText(CreateUser.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+                }
+            });
 
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
-                startActivity(intent);
-            }
-        });
+
+//        btnConfirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }
+
