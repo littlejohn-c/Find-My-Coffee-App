@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".MainActivityLogin">
 
@@ -12,15 +13,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/signin"
         android:background="@color/white"
-        android:text = "PLEASE SIGN IN "
+        android:text = "PLEASE SIGN IN"
+        android:textStyle="bold"
         android:textColor="#696112"
-        android:textSize="20dp"
-        android:layout_marginTop="370dp"
+        android:textSize="25dp"
+        android:layout_marginTop="360dp"
         android:gravity="center"/>
 
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/username1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/signin"
@@ -31,17 +33,17 @@
         android:background="#80696112"
         android:drawableLeft="@drawable/ic_baseline_person_outline_24"
         android:hint=" USERNAME:"
-
         android:padding="20dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textSize="20dp" />
 
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/password"
-        android:layout_below="@+id/username"
+        android:id="@+id/password1"
+        android:layout_below="@+id/username1"
         android:background="#80696112"
         android:hint=" PASSWORD:"
         android:textSize="20dp"
@@ -56,8 +58,8 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/loginbtn"
-        android:layout_below="@id/password"
+        android:id="@+id/btnLogin1"
+        android:layout_below="@id/password1"
         android:text="log in for coffee"
         android:textSize="25dp"
         android:textColor="#696112"
@@ -67,32 +69,18 @@
 
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/newUserButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/newUser"
-        android:layout_below="@id/loginbtn"
-        android:text="Create New User"
-        android:textSize="10dp"
-        android:textColor="#696112"
-        android:backgroundTint="@color/design_default_color_on_primary"
+        android:layout_below="@id/btnLogin1"
         android:layout_centerHorizontal="true"
-        android:layout_margin="30dp" />
-
-<!--        <TextView-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:id="@+id/forgotpassword"-->
-<!--            android:layout_below="@id/loginbtn"-->
-<!--            android:text="Forgot password?"-->
-<!--            android:textColor="#696112"-->
-<!--            android:layout_centerHorizontal="true"-->
-<!--            android:layout_margin="10dp"-->
-<!--        -->
-
-
-
-
-
-
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="@color/design_default_color_on_primary"
+        android:text="Create New User"
+        android:textColor="#696112"
+        android:textSize="10dp" />
 
 </RelativeLayout>
