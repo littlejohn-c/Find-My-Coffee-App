@@ -25,9 +25,9 @@ public class CreateUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_user);
 
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        btnConfirm = findViewById(R.id.btnConfirm);
+        username = (EditText)  findViewById(R.id.username);
+        password = (EditText)  findViewById(R.id.password);
+        btnConfirm = (Button)  findViewById(R.id.btnConfirm);
 
         DB = new DBHelper(this);
 
@@ -38,23 +38,31 @@ public class CreateUser extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
-                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass))
+                if (user.equals("") || pass.equals("")) {
                     Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
-                else {
+            } else {
                     Boolean checkuserpass = DB.checkUsernamePassword(user, pass);
                     if (checkuserpass == false) {
-                        Boolean insert = DB.insertData(user, pass);
+                        DB.insertData(user, pass);
+                    }
                         if (checkuserpass == true) {
-                            Toast.makeText(CreateUser.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
                             startActivity(intent);
                         } else {
                             Toast.makeText(CreateUser.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
                         }
                     }
-                }
             }
         });
+
+//        homeButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getApplicationContext(), CreateUser.class);
+//                startActivity(intent);
+//            }
+//        });
+
 //                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
 //                    Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
 //                else {

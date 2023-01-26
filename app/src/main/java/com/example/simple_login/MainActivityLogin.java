@@ -38,14 +38,14 @@ public class MainActivityLogin extends AppCompatActivity {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
 
-                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass))
+                if (user.equals("") || pass.equals("")) {
                     Toast.makeText(MainActivityLogin.this, "All fields required!", Toast.LENGTH_SHORT).show();
-                else {
+                } else {
                     Boolean checkuserpass = DB.checkUsernamePassword(user, pass);
-                    if (checkuserpass) {
-                        Toast.makeText(MainActivityLogin.this, "Login successful!", Toast.LENGTH_SHORT).show();
+                    if (checkuserpass == true) {
                         Intent intent = new Intent(getApplicationContext(), CoffeeShopListActivity.class);
                         startActivity(intent);
+                        Toast.makeText(MainActivityLogin.this, "Login successful!", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivityLogin.this, "Login failure. Try again.", Toast.LENGTH_SHORT).show();
                     }
