@@ -6,18 +6,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String dbName = "btnLogin.db";
+    public static final String dbName = "btnConfirm.db";
 
     public DBHelper(Context context) {
-        super(context, "btnLogin.db", null, 1);
+        super(context, "btnConfirm.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table users(username TEXT primary key, password TEXT)");
+        db.execSQL("create table users(username TEXT primary key, password TEXT, email TEXT)");
     }
 
     @Override

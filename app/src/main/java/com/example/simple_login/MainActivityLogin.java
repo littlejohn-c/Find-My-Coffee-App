@@ -42,7 +42,7 @@ public class MainActivityLogin extends AppCompatActivity {
                     Toast.makeText(MainActivityLogin.this, "All fields required!", Toast.LENGTH_SHORT).show();
                 else {
                     Boolean checkuserpass = DB.checkUsernamePassword(user, pass);
-                    if (checkuserpass == true) {
+                    if (checkuserpass) {
                         Toast.makeText(MainActivityLogin.this, "Login successful!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), CoffeeShopListActivity.class);
                         startActivity(intent);
