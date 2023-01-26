@@ -17,7 +17,7 @@ import org.w3c.dom.Text;
 
 public class CreateUser extends AppCompatActivity {
     EditText username, password;
-    Button btnConfirm, btnGoBack;
+    Button btnConfirm;
     DBHelper DB;
 
     @Override
@@ -27,7 +27,6 @@ public class CreateUser extends AppCompatActivity {
 
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
-//        email = findViewById(R.id.email);
         btnConfirm = findViewById(R.id.btnConfirm);
 
         DB = new DBHelper(this);
@@ -38,20 +37,24 @@ public class CreateUser extends AppCompatActivity {
             public void onClick(View view) {
                 String user = username.getText().toString();
                 String pass = password.getText().toString();
-//                String email = email.getText().toString();
 
                 if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass))
                     Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
                 else {
                     Boolean checkuserpass = DB.checkUsernamePassword(user, pass);
-                    if (checkuserpass == true) {
-                        Toast.makeText(CreateUser.this, " Login created!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(CreateUser.this, "Create account failure. Try again.", Toast.LENGTH_SHORT).show();
+                    if (checkuserpass == false) {
+                        Boolean insert = DB.insertData(user, pass);
+                        if (checkuserpass == true) {
+                            Toast.makeText(CreateUser.this, "Registered Successfully!", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivityLogin.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(CreateUser.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
+            }
+        });
 //                if (TextUtils.isEmpty(user) || TextUtils.isEmpty(pass) || TextUtils.isEmpty(mail))
 //                    Toast.makeText(CreateUser.this, "All fields required!", Toast.LENGTH_SHORT).show();
 //                else {
@@ -66,8 +69,6 @@ public class CreateUser extends AppCompatActivity {
 //                            Toast.makeText(CreateUser.this, "Registration Failed. Try Again.", Toast.LENGTH_SHORT).show();
 //                        }
 //                    }
-                }
-            });
     }
 }
 

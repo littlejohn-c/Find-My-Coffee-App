@@ -7,20 +7,18 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static final String dbName = "users.db";
+    public static final String DATABASE_NAME = "users.db";
+    public static final int DATABASE_VERSION = 1;
     public static final String COLUMN_USERNAMES = "username";
     public static final String COLUMN_PASSWORDS = "password";
+    private final Context context;
+    SQLiteDatabase db;
 
     public DBHelper(Context context) {
-
-        super(context, dbName, null, 1);
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
+        onCreate(db);
     }
-
-//    @Override
-//    public void onConfigure(SQLiteDatabase db) {
-//        super.onConfigure(db);
-//        db.setForeignKeyConstraintsEnabled(true);
-//    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -30,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists users");
-        onCreate(db);
+
     }
 
     public Boolean insertData(String username, String password) {
@@ -40,7 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("username", username);
         values.put("password", password);
 
-        long result = db.insert("users", null, values);
+        long result = db.insert(DATABASE_NAME, null, values);
+        db.close();
         if (result == -1)
             return false;
         else
@@ -51,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 //        Cursor cursor = db.rawQuery("select * from users where username = ?", new String[]{username});
 
-        Cursor cursor = db.rawQuery("SELECT * from " + dbName + " where username = ?", new String[]{username});
+        Cursor cursor = db.rawQuery("SELECT * from " + DATABASE_NAME + " where username = ?", new String[]{username});
         if (cursor.getCount() > 0)
             return true;
         else return false;
@@ -59,7 +58,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Boolean checkUsernamePassword(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
 //        Cursor cursor = db.rawQuery("select * from users where username = ? and password = ?", new String[]{username, password});
-        Cursor cursor = db.rawQuery("SELECT * from " + dbName + " where username = ? and password = ?", new String[]{username, password});
+        Cursor cursor = db.rawQuery("SELECT * from " + DATABASE_NAME + " where username = ? and password = ?", new String[]{username, password});
         if (cursor.getCount() > 0)
             return true;
         else return false;
