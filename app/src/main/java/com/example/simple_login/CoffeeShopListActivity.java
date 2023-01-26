@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -42,8 +43,11 @@ import com.google.android.libraries.places.api.model.PlaceLikelihood;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceRequest;
 import com.google.android.libraries.places.api.net.FindCurrentPlaceResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,9 +56,12 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class CoffeeShopListActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -75,6 +82,8 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
     private String[] likelyPlaceAddresses;
     private List[] likelyPlaceAttributions;
     private LatLng[] likelyPlaceLatLngs;
+    private String nearbyLocationsResponse;
+    private List<String> nearbyLocations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -185,6 +194,11 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
                                 map.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         new LatLng(lastKnownLocation.getLatitude(),
                                         lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                try {
+                                    getCoffeeShops();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         } else {
                             Log.d(TAG, "Current location is null. Using defaults.");
@@ -192,11 +206,6 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
                             map.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(defaultLocation, DEFAULT_ZOOM));
                             map.getUiSettings().setMyLocationButtonEnabled(false);
-                        }
-                        try {
-                            getCoffeeShops();
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
                     }
                 });
@@ -372,20 +381,42 @@ public class CoffeeShopListActivity extends AppCompatActivity implements OnMapRe
     }
 
     private void getCoffeeShops() throws IOException {
-        String fullUrl = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f%%2C%f&radius=1500&type=cafe&rankby=distance&key=%s"
+        @SuppressLint("DefaultLocale") String fullUrl = String.format("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%1f%%2C%2f&type=cafe&rankby=distance&key=%s"
                 , lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(), MAPS_API_KEY);
 
         OkHttpClient client = new OkHttpClient().newBuilder().build();
-//        MediaType mediaType = MediaType.parse("text/plain");
-//        RequestBody body = RequestBody.create(mediaType, "");
         Request request = new Request.Builder()
                 .url(fullUrl)
- //               .method("GET", body)
                 .build();
-        Response response = client.newCall(request).execute();
-        System.out.println(response);
+       Response response = client.newCall(request).execute();
+        // Get a handler that can be used to post to the main thread
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
-     //   CoffeeShop coffeeShop = new Gson().fromJson(String.valueOf(response), CoffeeShop.class);
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                } else {
+                    Gson g = new Gson();
+                    nearbyLocationsResponse = g.toJson(response);
+                    CoffeeShop coffeeShop = g.fromJson(nearbyLocationsResponse, CoffeeShop.class);
+                    setCoffeeShops(coffeeShop);
+                }
+            }
+        });
+    }
+
+    private void setCoffeeShops(CoffeeShop coffeeShop){
+//        for(int i = 0; i < nearbyLocations.length; i++){
+//            new CoffeeShop(nearbyLocations[i].name,nearbyLocations[i].address,nearbyLocations[i].hours);
+//            map.addMarker(new MarkerOptions()
+//                    .position(nearbyLocations[i].location)
+//                    .title(nearbyLocations[i].name));
+//        }
     }
 
 }
